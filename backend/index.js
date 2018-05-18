@@ -27,8 +27,8 @@ Twitter.on('connection success', function (uri) {
 
 Twitter.on('data', function (obj) {
   let tweet = JSON.parse(obj.toString())
-  // Ignore retweets, replies and quotes
-  if (!tweet.retweeted_status && !tweet.in_reply_to_status_id && !tweet.quoted_status_id)
+  // Ignore retweets, replies, quotes and tweets without user
+  if (!tweet.retweeted_status && !tweet.in_reply_to_status_id && !tweet.quoted_status_id && tweet.user)
     saveTweetOnFirebase(tweet)
 });
 
